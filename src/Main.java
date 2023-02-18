@@ -18,14 +18,19 @@ public class Main {
 
         //TODO: figure out how to have a person have multiple wallets
         Person person2 = context.getBean("person", Person.class);
+        boolean result = (person2.getWallet() == person.getWallet());
+        System.out.println(result);
+
+    person.setWallet(wallet);
+    wallet.setCard(mc);
+    wallet.setCard(discover);
+    wallet.setCard(visa);
+    wallet.setCard(visa);
 
 
         // call method on the bean
-
-        System.out.println(person.getTotalInterestFromOneCard(wallet, mc));
-        System.out.println(person.getTotalInterestFromTwoCards(wallet, mc, discover));
-        System.out.println(person.getTotalInterestFromThreeCards(wallet, mc, discover, visa));
-
+        System.out.println(person.calculateTotalInterestPerPerson(wallet.getCards()));
+        person.calculateTotalInterestPerCard(wallet.getCards());
 
         //close the context
         context.close();

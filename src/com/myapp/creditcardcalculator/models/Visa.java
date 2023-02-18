@@ -15,7 +15,7 @@ public class Visa implements Card {
     @Value("${foo.visaInterest}")
     private String rate;
 
-    private CalculateInterestService calculateInterest;
+    private final CalculateInterestService calculateInterest;
 
     @Autowired
     public Visa(CalculateInterestService theCalculateInterest) {

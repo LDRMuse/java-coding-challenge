@@ -7,6 +7,7 @@ import com.myapp.creditcardcalculator.services.MonthlyInterestService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.Scope;
 
 @Configuration
 @PropertySource("classpath:/card.properties")
@@ -32,25 +33,16 @@ public class MyAppConfig {
         return new Discover(monthlyInterestService());
     }
 
-//    @Bean
-//    public Wallet wallet() {
-//        return new Wallet(mastercard(), visa(), discover());
-//    }
-
-//    @Bean
-//    public Wallet wallet2() {
-//        return new Wallet(visa(), discover());
-//    }
-//
     @Bean
+    @Scope("prototype")
     public Wallet wallet() {
         return new Wallet();
     }
 
-
     @Bean
+    @Scope("prototype")
     public Person person() {
-        return new Person();
+        return new Person(wallet());
     }
 
 
