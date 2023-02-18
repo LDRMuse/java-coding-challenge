@@ -1,13 +1,11 @@
 package com.myapp.creditcardcalculator.models;
 
 import com.myapp.creditcardcalculator.interfaces.Card;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 
 @Component
-@Scope("prototype")
 public class Wallet {
 
     private Card mastercard;

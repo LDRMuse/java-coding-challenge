@@ -4,5 +4,7 @@ public interface Card {
 
     public double calculateInterest();
 
+    public String nameOfCard();
+
 
 }

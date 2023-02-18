@@ -1,47 +1,62 @@
 package com.myapp.creditcardcalculator.models;
 
 import com.myapp.creditcardcalculator.interfaces.Card;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
-@Scope("prototype")
 public class Person {
 
     private Wallet wallet;
+    private final ArrayList<Wallet> wallets = new ArrayList<>();
 
-
-    public Person(Wallet wallet) {
-        this.wallet = wallet;
-    }
 
     public Wallet getWallet() {
         return wallet;
     }
 
     public void setWallet(Wallet wallet) {
+        addWalletToWallets(wallet);
         this.wallet = wallet;
     }
 
-    // Challenge stated: "calculate the total interest (simple interest) for this person and per card"
+    public ArrayList<Wallet> getWallets() {
+        return wallets;
+    }
+
+    public void setWallets(ArrayList<Wallet> wallets) {
+    }
+
+
+    // Challenge stated: "calculate the total interest (simple interest) for a person ..."
+    //should return double
     public double calculateTotalInterestPerPerson(List<Card> cards) {
         double total = 0;
         for (Card card : cards) {
             total += card.calculateInterest();
         }
+        System.out.println("Total interest of all cards per person, per month: " + total);
         return total;
     }
 
     // Challenge stated: "calculate the total interest (simple interest) for .... and per card"
-    public void calculateTotalInterestPerCard(List<Card> cards) {
+    //should return arraylist
+    public ArrayList<Double> calculateTotalInterestPerCard(List<Card> cards) {
+        ArrayList<Double> interestPerCard = new ArrayList<>();
         for (Card card : cards) {
-            card.calculateInterest();
-            System.out.println("Card " + card + "has an interest value of " + card.calculateInterest());
+            interestPerCard.add(card.calculateInterest());
         }
+        return interestPerCard;
     }
+
+    public void addWalletToWallets(Wallet w) {
+        wallets.add(w);
+        setWallets(wallets);
+    }
+
 
     @PostConstruct
     public void methodOnInit() {

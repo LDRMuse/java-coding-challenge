@@ -12,7 +12,7 @@ public class Discover implements Card {
     private String principal;
     @Value("${foo.discoverInterest}")
     private String rate;
-    private CalculateInterestService calculateInterest;
+    private final CalculateInterestService calculateInterest;
     @Autowired
     public Discover(CalculateInterestService theCalculateInterest) {
         calculateInterest = theCalculateInterest; }
@@ -39,5 +39,10 @@ public class Discover implements Card {
     @Override
     public double calculateInterest() {
         return calculateInterest.calculateInterest(getPrincipal(), getRate());
+    }
+
+    @Override
+    public String nameOfCard() {
+        return "Discover";
     }
 }

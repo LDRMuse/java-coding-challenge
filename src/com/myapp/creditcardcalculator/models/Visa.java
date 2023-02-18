@@ -45,5 +45,9 @@ public class Visa implements Card {
        return calculateInterest.calculateInterest(getPrincipal(), getRate());
     }
 
+    public String nameOfCard() {
+        return "Visa";
+    }
+
 
 }

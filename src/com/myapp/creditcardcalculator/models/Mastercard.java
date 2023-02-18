@@ -14,7 +14,7 @@ public class Mastercard implements Card {
     @Value("${foo.mastercardInterest}")
     private String rate;
 
-    private CalculateInterestService calculateInterest;
+    private final CalculateInterestService calculateInterest;
 
     public Mastercard(CalculateInterestService theCalculateInterest) {
         calculateInterest = theCalculateInterest;
@@ -39,6 +39,11 @@ public class Mastercard implements Card {
     @Override
     public double calculateInterest() {
         return calculateInterest.calculateInterest(getPrincipal(), getRate());
+    }
+
+    @Override
+    public String nameOfCard() {
+        return "Mastercard";
     }
 
 }
