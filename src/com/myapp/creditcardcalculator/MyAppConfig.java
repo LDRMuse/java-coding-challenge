@@ -2,9 +2,7 @@ package com.myapp.creditcardcalculator;
 
 import com.myapp.creditcardcalculator.interfaces.CalculateInterestService;
 import com.myapp.creditcardcalculator.interfaces.Card;
-import com.myapp.creditcardcalculator.models.Discover;
-import com.myapp.creditcardcalculator.models.Mastercard;
-import com.myapp.creditcardcalculator.models.Visa;
+import com.myapp.creditcardcalculator.models.*;
 import com.myapp.creditcardcalculator.services.MonthlyInterestService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +22,6 @@ public class MyAppConfig {
     public Card mastercard() {
         return new Mastercard(monthlyInterestService());
     }
-
     @Bean
     public Card visa() {
         return new Visa(monthlyInterestService());
@@ -33,6 +30,27 @@ public class MyAppConfig {
     @Bean
     public Card discover() {
         return new Discover(monthlyInterestService());
+    }
+
+//    @Bean
+//    public Wallet wallet() {
+//        return new Wallet(mastercard(), visa(), discover());
+//    }
+
+//    @Bean
+//    public Wallet wallet2() {
+//        return new Wallet(visa(), discover());
+//    }
+//
+    @Bean
+    public Wallet wallet() {
+        return new Wallet();
+    }
+
+
+    @Bean
+    public Person person() {
+        return new Person();
     }
 
 

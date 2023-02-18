@@ -2,21 +2,22 @@ package com.myapp.creditcardcalculator.models;
 
 import com.myapp.creditcardcalculator.interfaces.CalculateInterestService;
 import com.myapp.creditcardcalculator.interfaces.Card;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 
 @Component
 public class Mastercard implements Card {
 
-    private double principal;
+    @Value("${foo.cardBalance}")
+    private String principal;
     @Value("${foo.mastercardInterest}")
     private String rate;
+
     private CalculateInterestService calculateInterest;
-    @Autowired
-    public Mastercard(CalculateInterestService calculateInterest) {
+
+    public Mastercard(CalculateInterestService theCalculateInterest) {
+        calculateInterest = theCalculateInterest;
     }
 
     public void setRate(String rate) {
@@ -27,12 +28,12 @@ public class Mastercard implements Card {
         return Double.parseDouble(rate);
     }
 
-    public void setPrincipal(double principal) {
+    public void setPrincipal(String principal) {
         this.principal = principal;
     }
 
     public double getPrincipal() {
-        return principal;
+        return Double.parseDouble(principal);
     }
 
     @Override
@@ -40,9 +41,4 @@ public class Mastercard implements Card {
         return calculateInterest.calculateInterest(getPrincipal(), getRate());
     }
 
-
-    @PostConstruct
-    public void sayHiAtStartup() {
-        System.out.println(rate.toString());
-    }
 }

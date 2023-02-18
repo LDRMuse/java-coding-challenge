@@ -6,20 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 
 @Component
 public class Visa implements Card {
 
-    private double principal;
+    @Value("${foo.cardBalance}")
+    private String principal;
     @Value("${foo.visaInterest}")
     private String rate;
 
     private CalculateInterestService calculateInterest;
 
     @Autowired
-    public Visa(CalculateInterestService calculateInterest) {
-    }
+    public Visa(CalculateInterestService theCalculateInterest) {
+        calculateInterest = theCalculateInterest; }
 
 
     public void setRate(String rate) {
@@ -31,12 +31,12 @@ public class Visa implements Card {
 
     }
 
-    public void setPrincipal(double principal) {
+    public void setPrincipal(String principal) {
         this.principal = principal;
     }
 
     public double getPrincipal() {
-        return principal;
+        return Double.parseDouble(principal);
     }
 
 

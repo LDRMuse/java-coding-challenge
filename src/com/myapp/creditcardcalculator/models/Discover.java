@@ -8,15 +8,14 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Discover implements Card {
-
-    private double principal;
+    @Value("${foo.cardBalance}")
+    private String principal;
     @Value("${foo.discoverInterest}")
     private String rate;
     private CalculateInterestService calculateInterest;
     @Autowired
-    public Discover(CalculateInterestService calculateInterest) {
-    }
-
+    public Discover(CalculateInterestService theCalculateInterest) {
+        calculateInterest = theCalculateInterest; }
 
     public void setRate(String rate) {
         this.rate = rate;
@@ -27,12 +26,13 @@ public class Discover implements Card {
 
     }
 
-    public void setPrincipal(double principal) {
+    public void setPrincipal(String principal) {
         this.principal = principal;
     }
 
     public double getPrincipal() {
-        return principal;
+        return Double.parseDouble(principal);
+
     }
 
 
