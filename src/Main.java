@@ -4,6 +4,8 @@ import com.myapp.creditcardcalculator.models.Person;
 import com.myapp.creditcardcalculator.models.Wallet;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.util.HashMap;
+
 public class Main {
     public static void main(String[] args) {
         // read spring config file
@@ -14,6 +16,7 @@ public class Main {
         Card visa = context.getBean("visa", Card.class);
         Card discover = context.getBean("discover", Card.class);
 
+        // Create Person and two wallets and set wallet to person
         Person person = new Person();
         Wallet wallet = new Wallet();
         Wallet wallet2 = new Wallet();
@@ -21,24 +24,21 @@ public class Main {
         person.setWallet(wallet);
         person.setWallet(wallet2);
 
+        // Set cards in wallets
         wallet.setCard(mc);
         wallet.setCard(discover);
         wallet.setCard(visa);
         wallet.setCard(visa);
 
-
         wallet2.setCard(discover);
         wallet2.setCard(mc);
 
-
-        // call method on the bean
-       person.calculateTotalInterestPerPerson(wallet.getCards());
-        System.out.println();
+        person.calculateTotalInterestPerPerson(wallet.getCards());
         person.calculateTotalInterestPerCard(wallet.getCards());
+
         System.out.println("-------------------------------------");
 
         person.calculateTotalInterestPerPerson(wallet2.getCards());
-        System.out.println();
         person.calculateTotalInterestPerCard(wallet2.getCards());
 
         //close the context

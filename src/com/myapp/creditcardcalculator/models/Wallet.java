@@ -11,7 +11,7 @@ public class Wallet {
     private Card mastercard;
     private Card visa;
     private Card discover;
-    private Card card;
+
     private final ArrayList<Card> cards = new ArrayList<>();
 
 
@@ -37,10 +37,6 @@ public class Wallet {
 
     public void setDiscover(Card discover) {
         this.discover = discover;
-    }
-
-    public Card getCard() {
-        return card;
     }
 
     public ArrayList<Card> getCards() {

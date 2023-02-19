@@ -45,6 +45,7 @@ public class Visa implements Card {
        return calculateInterest.calculateInterest(getPrincipal(), getRate());
     }
 
+    @Override
     public String nameOfCard() {
         return "Visa";
     }
