@@ -1,7 +1,8 @@
-package com.myapp.creditcardcalculator.models;
+package com.myapp.creditcardcalculator.tests;
 
 import com.myapp.creditcardcalculator.interfaces.CalculateInterestService;
 import com.myapp.creditcardcalculator.interfaces.Card;
+import com.myapp.creditcardcalculator.models.*;
 import com.myapp.creditcardcalculator.services.MonthlyInterestService;
 import org.junit.jupiter.api.Test;
 
