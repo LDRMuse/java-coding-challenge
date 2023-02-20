@@ -8,34 +8,35 @@ import java.util.ArrayList;
 @Component
 public class Wallet {
 
-    private Card mastercard;
-    private Card visa;
-    private Card discover;
-
+    private Mastercard mastercard;
+    private Visa visa;
+    private Discover discover;
     private final ArrayList<Card> cards = new ArrayList<>();
 
-
-    public Card getMastercard() {
+    public Mastercard getMastercard() {
         return mastercard;
     }
 
-    public void setMastercard(Card mastercard) {
+    public void setMastercard(Mastercard mastercard) {
+        addCardToCardArray(mastercard);
         this.mastercard = mastercard;
     }
 
-    public Card getVisa() {
+    public Visa getVisa() {
         return visa;
     }
 
-    public void setVisa(Card visa) {
+    public void setVisa(Visa visa) {
+        addCardToCardArray(visa);
         this.visa = visa;
     }
 
-    public Card getDiscover() {
+    public Discover getDiscover() {
         return discover;
     }
 
-    public void setDiscover(Card discover) {
+    public void setDiscover(Discover discover) {
+        addCardToCardArray(discover);
         this.discover = discover;
     }
 
@@ -46,16 +47,6 @@ public class Wallet {
     public void setCards(ArrayList<Card> cards) {
     }
 
-
-    public void setCard(Card card) {
-        addCardToCardArray(card);
-        if(card.equals(getDiscover())) {
-            this.discover = card;
-        } else if (card.equals(getVisa())) {
-            this.visa = card;
-        } else if (card.equals(getMastercard())) {
-            this.mastercard = card;
-        }}
 
     public void addCardToCardArray(Card c) {
         cards.add(c);

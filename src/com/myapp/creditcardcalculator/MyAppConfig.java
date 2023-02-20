@@ -19,16 +19,16 @@ public class MyAppConfig {
     }
 
     @Bean
-    public Card mastercard() {
+    public Mastercard mastercard() {
         return new Mastercard(monthlyInterestService());
     }
     @Bean
-    public Card visa() {
+    public Visa visa() {
         return new Visa(monthlyInterestService());
     }
 
     @Bean
-    public Card discover() {
+    public Discover discover() {
         return new Discover(monthlyInterestService());
     }
 

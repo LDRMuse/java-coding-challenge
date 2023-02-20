@@ -3,11 +3,15 @@ package com.myapp.creditcardcalculator.models;
 import com.myapp.creditcardcalculator.interfaces.CalculateInterestService;
 import com.myapp.creditcardcalculator.interfaces.Card;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 
 @Component
+@Qualifier("visa")
+@Scope("prototype")
 public class Visa implements Card {
 
     @Value("${foo.cardBalance}")
@@ -15,11 +19,12 @@ public class Visa implements Card {
     @Value("${foo.visaInterest}")
     private String rate;
 
-    private final CalculateInterestService calculateInterest;
+    @Autowired
+    private CalculateInterestService monthlyInterestService;
 
     @Autowired
     public Visa(CalculateInterestService theCalculateInterest) {
-        calculateInterest = theCalculateInterest; }
+        monthlyInterestService = theCalculateInterest; }
 
 
     public void setRate(String rate) {
@@ -37,12 +42,13 @@ public class Visa implements Card {
 
     public double getPrincipal() {
         return Double.parseDouble(principal);
+
     }
 
 
     @Override
     public double calculateInterest() {
-       return calculateInterest.calculateInterest(getPrincipal(), getRate());
+       return monthlyInterestService.calculateInterest(getPrincipal(), getRate());
     }
 
     @Override
