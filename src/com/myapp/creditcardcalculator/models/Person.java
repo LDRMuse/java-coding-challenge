@@ -79,7 +79,6 @@ public class Person {
         setWallets(wallets);
     }
 
-    // I was going to take this out but wanted to show you that I know this, lol
     @PostConstruct
     public void methodOnInit() {
         System.out.println("Inside person object");

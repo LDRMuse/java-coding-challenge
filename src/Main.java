@@ -1,6 +1,5 @@
 import com.myapp.creditcardcalculator.MyAppConfig;
-import com.myapp.creditcardcalculator.interfaces.CalculateInterestService;
-import com.myapp.creditcardcalculator.interfaces.Card;
+
 import com.myapp.creditcardcalculator.models.*;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
