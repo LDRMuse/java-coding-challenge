@@ -4,8 +4,8 @@ import com.myapp.creditcardcalculator.interfaces.CalculateInterestService;
 
 public class MonthlyInterestService implements CalculateInterestService {
 
-    public double calculateInterest(double principal, double rate) {
+    public double calculateInterest(double cardBalance, double interestRate) {
         int month = 1;
-        return (principal * rate * month) / 100;
+        return (cardBalance * interestRate * month) / 100;
     }
 }

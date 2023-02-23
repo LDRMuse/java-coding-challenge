@@ -1,13 +1,11 @@
 package com.myapp.creditcardcalculator.models;
 
 import com.myapp.creditcardcalculator.interfaces.Card;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
 
 @Component
-@Qualifier("person")
 public class Person {
 
     private final List<Wallet> wallets = new ArrayList<>();
