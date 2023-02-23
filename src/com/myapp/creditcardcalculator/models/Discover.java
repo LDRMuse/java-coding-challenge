@@ -2,48 +2,33 @@ package com.myapp.creditcardcalculator.models;
 
 import com.myapp.creditcardcalculator.interfaces.CalculateInterestService;
 import com.myapp.creditcardcalculator.interfaces.Card;
+import com.myapp.creditcardcalculator.services.PropertiesService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
-@Qualifier("discover")
-@Scope("prototype")
 public class Discover implements Card {
-    @Value("${foo.cardBalance}")
-    private String principal;
-    @Value("${foo.discoverInterest}")
-    private String rate;
+
+    PropertiesService propertiesService = new PropertiesService();
 
     private final CalculateInterestService monthlyInterestService;
     @Autowired
     public Discover(CalculateInterestService theCalculateInterest) {
         monthlyInterestService = theCalculateInterest; }
 
-    public void setRate(String rate) {
-        this.rate = rate;
+    public double getInterestRate() {
+      return Double.parseDouble(propertiesService.getDiscoverInterest());
     }
 
-    public double getRate() {
-        return Double.parseDouble(rate);
-
-    }
-
-    public void setPrincipal(String principal) {
-        this.principal = principal;
-    }
-
-    public double getPrincipal() {
-        return Double.parseDouble(principal);
+    public double getCardBalance() {
+        return 100;
 
     }
 
 
     @Override
     public double calculateInterest() {
-        return monthlyInterestService.calculateInterest(getPrincipal(), getRate());
+        return monthlyInterestService.calculateInterest(getCardBalance(), getInterestRate());
     }
 
     @Override

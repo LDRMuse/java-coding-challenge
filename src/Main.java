@@ -1,5 +1,7 @@
 import com.myapp.creditcardcalculator.MyAppConfig;
 
+import com.myapp.creditcardcalculator.interfaces.CalculateInterestService;
+import com.myapp.creditcardcalculator.interfaces.Card;
 import com.myapp.creditcardcalculator.models.*;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -12,21 +14,22 @@ public class Main {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(MyAppConfig.class);
 
         // get bean from spring container
-        Mastercard mastercard = context.getBean("mastercard", Mastercard.class);
-        Visa visa = context.getBean("visa", Visa.class);
-        Discover discover = context.getBean("discover", Discover.class);
+        CalculateInterestService monthlyInterestService = context.getBean("monthlyInterestService", CalculateInterestService.class);
+
+        Card visa = new Visa(monthlyInterestService);
+        Card discover = new Discover(monthlyInterestService);
+        Card mastercard = new Mastercard(monthlyInterestService);
 
         Person person = new Person();
         Wallet wallet = new Wallet();
         Wallet wallet2 = new Wallet();
 
-
         person.setWallet(wallet);
         person.setWallet(wallet2);
 
-        wallet.setMastercard(mastercard);
-        wallet2.setVisa(visa);
-        wallet2.setDiscover(discover);
+        wallet.setCard(mastercard);
+        wallet2.setCard(visa);
+        wallet2.setCard(discover);
 
 
         System.out.println(person.calculateTotalInterestPerPersonForAllCards(person.getWallets()));
